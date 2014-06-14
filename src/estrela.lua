@@ -1,34 +1,26 @@
 -----------------------------------------------------------
 --  Estrela
 -----------------------------------------------------------
-local estrela = {}
 local modules = {}
 local cache   = {}
 
-estrela.modules = modules
-estrela.cache   = cache
+local register, scan, require
 
-local function splitpath(path)
-  local pattern = [[(.-)([^\/.]*)([^\/]-)$]]
-  local dir, name, ext = path:match(pattern)
-  return {
-    full = path;
-    dir  = dir;
-    name = name;
-    ext  = ext;
-  }
+function register(path)
+  local pattern = [[(.-)([^\/]*)%.mod%.lua$]]
+  local dir, name = path:match(pattern)
+  modules[name] = { path = path, dir = dir }
 end
 
 if jit.os == 'Windows' then
 
-  function estrela.scan(scanpath, format)
+  function scan(scanpath)
     local cmd = 'dir "' .. scanpath .. '\\'
-              .. (format or '*.mod.lua')
+              .. '*.mod.lua'
               .. '" /b /a:-d /s /l'
 
     for modpath in io.popen(cmd):lines() do
-      local path = splitpath(modpath)
-      modules[path.name] = { path = path }
+      register(modpath)
     end
   end
 
@@ -36,17 +28,22 @@ else
   error 'Missing scan method for current platform'
 end
 
-function estrela.require(name)
+function require(name)
   if not cache[name] then
     assert(modules[name], 'Module not exist')
 
     local temp   = package.path
-    package.path = modules[name].path.dir .. '?.lua;' .. package.path
-    cache[name]  = { loadfile(modules[name].path.full)() }
+    package.path = modules[name].dir .. '?.lua;' .. package.path
+    cache[name]  = { loadfile(modules[name].path)() }
     package.path = temp
   end
 
   return unpack(cache[name])
 end
 
-return estrela
+return {
+  scan    = scan;
+  require = require;
+  modules = modules;
+  cache   = cache;
+}
