@@ -1,4 +1,5 @@
-/Estrela.sublime-project
-/Estrela.sublime-workspace
-/local/
-*.temp.*
+/__local/
+*.sublime-project
+*.sublime-workspace
+*.dll
+*.exe
