@@ -48,18 +48,6 @@ function mod.partition(s, d, pattern)
   return nil
 end
 
-function mod.random(len, dict)
-  if type(dict) == 'string' then
-    dict = mod.totable(dict)
-  end
-
-  local t = {}
-  for i = 1, len do
-    t[i] = dict[math.random(1, #dict)]
-  end
-  return table.concat(t)
-end
-
 function mod.totable(s)
   local t = {}
   for i = 1, #s do
