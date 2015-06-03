@@ -1,11 +1,11 @@
 local mod = {}
 
 mod.const = {
-  whitespace      = [[\32\t\n\v\f\r]];
-  punctuation     = [[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]];
-  ascii_uppercase = [[ABCDEFGHIJKLMNOPQRSTUVWXYZ]];
-  ascii_lowercase = [[abcdefghijklmnopqrstuvwxyz]];
-  digits          = [[0123456789]];
+  whitespace  = [[\32\t\n\v\f\r]];
+  punctuation = [[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]];
+  uppercase   = [[ABCDEFGHIJKLMNOPQRSTUVWXYZ]];
+  lowercase   = [[abcdefghijklmnopqrstuvwxyz]];
+  digits      = [[0123456789]];
 }
 
 function mod.count(s, d, pattern)
@@ -20,6 +20,20 @@ function mod.count(s, d, pattern)
   end
 
   return c
+end
+
+function mod.findall(s, d, pattern)
+  local t = {}
+
+  local start = 0
+  local from, to = string.find(s, d, start, not pattern)
+  while from do
+    t[#t + 1] = { from, to }
+    start = to + 1
+    from, to = string.find(s, d, start, not pattern)
+  end
+
+  return t
 end
 
 function mod.split(s, d, pattern)
@@ -48,12 +62,40 @@ function mod.partition(s, d, pattern)
   return nil
 end
 
+function mod.starts(s, sub, pattern)
+  local from, _ = string.find(s, sub, 1, not pattern)
+  if from == 1 then
+    return true
+  end
+  return false
+end
+
+function mod.ends(s, sub, pattern)
+  if pattern then
+    local all  = mod.findall(s, sub, true)
+    local last = all[#all]
+    if last and last[2] == #s then
+      return true
+    end
+  else
+    local _, to = string.find(s, sub, -#sub, false)
+    if to == #s then
+      return true
+    end
+  end
+  return false
+end
+
 function mod.totable(s)
   local t = {}
   for i = 1, #s do
     t[i] = string.sub(s, i, i)
   end
   return t
+end
+
+function mod.at(s, i)
+  return string.sub(s, i, i)
 end
 
 return mod
