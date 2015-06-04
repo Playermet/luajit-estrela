@@ -1,21 +1,17 @@
 local mod = {}
 
-local class_mt = {}
-
-function class_mt:__call(...)
-  local object = setmetatable({}, self)
-  local constructor = self.__init
-  if type(constructor) == 'function' then
-    constructor(object, ...)
-  end
-  return object
+function mod.class(class, ...)
+  class = class or {}
+  class.__index = class
+  return class, mod
 end
 
-function mod.class()
-  local new_class = {}
-  new_class.__index = new_class
-  setmetatable(new_class, class_mt)
-  return new_class
+function mod.object(class, object)
+  return setmetatable(object, class)
+end
+
+function mod.classof(object)
+  return getmetatable(object)
 end
 
 return mod
