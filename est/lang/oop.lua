@@ -1,9 +1,9 @@
 local mod = {}
 
-function mod.class(class, ...)
+function mod.class(class)
   class = class or {}
   class.__index = class
-  return class, mod
+  return class
 end
 
 function mod.object(class, object)
