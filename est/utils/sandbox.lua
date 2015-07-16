@@ -93,10 +93,10 @@ end
 
 function mod.run(code, env, ...)
   local func, msg = load(code, nil, 't', env)
-  if not func then
-    return nil, msg
+  if func then
+    return pcall(func, ...)
   end
-  return pcall(func, ...)
+  return nil, msg
 end
 
 return mod
