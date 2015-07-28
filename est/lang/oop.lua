@@ -6,6 +6,14 @@ function mod.class(class)
   return class
 end
 
+function mod.extend(class, base)
+  for k,v in pairs(base) do
+    if class[k] == nil then
+      class[k] = v
+    end
+  end
+end
+
 function mod.object(class, object)
   return setmetatable(object, class)
 end
