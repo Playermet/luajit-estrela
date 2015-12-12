@@ -16,19 +16,35 @@ function mod.parse(str)
     bmeta = {};
   }
 
-  if xtype == '-' and x then
+  if xtype == '-' and estring.not_empty(x) then
     -- x is release type
     version.rtype = estring.split(x, '.')
-  elseif xtype == '+' and x then
+  elseif xtype == '+' and estring.not_empty(x) then
     -- x is build metadata
     version.bmeta = estring.split(x, '.')
   end
 
-  if y then
+  if estring.not_empty(y) then
     version.bmeta = estring.split(y, '.')
   end
 
   return version
+end
+
+function mod.tostring(version)
+  local str = string.format('%s.%s.%s',
+    version.major, version.minor, version.patch
+  )
+
+  if #version.rtype > 0 then
+    str = str .. '-' .. table.concat(version.rtype, '.')
+  end
+
+  if #version.bmeta > 0 then
+    str = str .. '+' .. table.concat(version.bmeta, '.')
+  end
+
+  return str
 end
 
 return mod
