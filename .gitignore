@@ -1,5 +1,4 @@
-/__local/
+/local/
 *.sublime-project
 *.sublime-workspace
-*.dll
 *.exe
