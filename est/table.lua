@@ -32,4 +32,12 @@ function mod.copy(t)
   return r
 end
 
+function mod.flip(t)
+  local r = {}
+  for k,v in pairs(t) do
+    r[v] = k
+  end
+  return r
+end
+
 return mod
