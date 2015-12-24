@@ -40,4 +40,42 @@ function mod.flip(t)
   return r
 end
 
+function mod.find(t, what, from)
+  for k,v in next,t,from  do
+    if v == what then
+      return k
+    end
+  end
+  return nil
+end
+
+function mod.find_all(t, what, from)
+  local r = {}
+  for k,v in next,t,from  do
+    if v == what then
+      r[#r + 1] = k
+    end
+  end
+  return r
+end
+
+function mod.match(t, match_func, from)
+  for k,v in next,t,from  do
+    if match_func(k,v,t) then
+      return k
+    end
+  end
+  return nil
+end
+
+function mod.match_all(t, match_func, from)
+  local r = {}
+  for k,v in next,t,from  do
+    if match_func(k,v,t) then
+      r[#r + 1] = k
+    end
+  end
+  return r
+end
+
 return mod
