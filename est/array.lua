@@ -12,6 +12,18 @@ function mod.copy(a)
   return r
 end
 
+function mod.fill(a, from, to, value)
+  for i = from, to do
+    a[i] = value
+  end
+end
+
+function mod.fill_ex(a, from, to, fillf)
+  for i = from, to do
+    a[i] = fillf(i, a)
+  end
+end
+
 function mod.find(a, what, from)
   for i = from,#a do
     if a[i] == what then
