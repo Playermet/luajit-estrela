@@ -2,7 +2,7 @@ local mod = {}
 
 function mod.getn(t)
   local r = 0
-  for k,v in pairs(t) do
+  for _ in pairs(t) do
     r = r + 1
   end
   return r
@@ -16,7 +16,7 @@ function mod.keys(t)
   return r
 end
 
-function mod.vals(t)
+function mod.values(t)
   local r = {}
   for _,v in pairs(t) do
     r[#r + 1] = v
