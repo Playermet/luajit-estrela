@@ -1,6 +1,6 @@
 local mod = {}
 
-function mod.getn(t)
+function mod.size(t)
   local r = 0
   for _ in pairs(t) do
     r = r + 1

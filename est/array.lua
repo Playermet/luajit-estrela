@@ -1,6 +1,6 @@
 local mod = {}
 
-function mod.getn(a)
+function mod.size(a)
   return #a
 end
 
