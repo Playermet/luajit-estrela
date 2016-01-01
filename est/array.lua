@@ -62,4 +62,29 @@ function mod.match_all(a, match_func, from)
   return r
 end
 
+function mod.back(a)
+  return a[#a]
+end
+
+function mod.push_back(a, value)
+  a[#a + 1] = value
+end
+
+function mod.pop_back(a)
+  a[#a] = nil
+end
+
+function mod.append(a, b)
+  for i = 1,#b do
+    a[#a + 1] = b[i]
+  end
+end
+
+function mod.shuffle(a)
+  for i = #a, 2, -1 do
+    local j = math.random(i)
+    a[i], a[j] = a[j], a[i]
+  end
+end
+
 return mod
