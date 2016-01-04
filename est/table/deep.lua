@@ -1,10 +1,11 @@
 local mod = {}
+local aux = {}
 
-function mod.getn(x)
+function mod.size(x)
   if aux.istable(x) then
     local r = 0
     for _,v in pairs(x) do
-      r = r + mod.getn(v)
+      r = r + mod.size(v)
     end
     return r
   end
@@ -47,6 +48,7 @@ function mod.apply(x, diff)
     for k in pairs(diff) do
       x[k] = mod.apply(x[k], diff[k])
     end
+    return x
   end
   if aux.notnull(diff) then
     return diff
@@ -56,13 +58,23 @@ end
 function mod.merge(x,y)
   if aux.istable(x) and aux.istable(y) then
     local merged = {}
+    for k in pairs(x) do
+      merged[k] = mod.merge(x[k],y[k])
+    end
     for k in pairs(y) do
       merged[k] = mod.merge(x[k],y[k])
     end
     return merged
   end
-  if aux.notnull(y) then
-    return y
+  if y ~= nil then
+    if aux.notnull(y) then
+      return y
+    else
+      return nil
+    end
+  end
+  if aux.notnull(x) then
+    return x
   end
 end
 
