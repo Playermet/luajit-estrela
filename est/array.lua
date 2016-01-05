@@ -62,6 +62,18 @@ function mod.match_all(a, match_func, from)
   return r
 end
 
+function mod.front(a)
+  return a[1]
+end
+
+function mod.push_front(a, value)
+  table.insert(a, 1, value)
+end
+
+function mod.pop_front(a)
+  table.remove(a, 1)
+end
+
 function mod.back(a)
   return a[#a]
 end
@@ -85,6 +97,25 @@ function mod.shuffle(a)
     local j = math.random(i)
     a[i], a[j] = a[j], a[i]
   end
+end
+
+function mod.reverse(a, from, to)
+	from = from or 1
+	to   = to   or #a
+
+	while from < to do
+		a[from], a[to] = a[to], a[from]
+		from = from + 1
+		to = to - 1
+	end
+end
+
+function mod.rotate(a, step)
+	step = step % #a
+
+	mod.reverse(a, 1, step)
+	mod.reverse(a, step + 1, #a)
+	mod.reverse(a, 1, #a)
 end
 
 return mod
