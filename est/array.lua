@@ -100,22 +100,22 @@ function mod.shuffle(a)
 end
 
 function mod.reverse(a, from, to)
-	from = from or 1
-	to   = to   or #a
+  from = from or 1
+  to   = to   or #a
 
-	while from < to do
-		a[from], a[to] = a[to], a[from]
-		from = from + 1
-		to = to - 1
-	end
+  while from < to do
+    a[from], a[to] = a[to], a[from]
+    from = from + 1
+    to = to - 1
+  end
 end
 
 function mod.rotate(a, step)
-	step = step % #a
+  step = step % #a
 
-	mod.reverse(a, 1, step)
-	mod.reverse(a, step + 1, #a)
-	mod.reverse(a, 1, #a)
+  mod.reverse(a, 1, step)
+  mod.reverse(a, step + 1, #a)
+  mod.reverse(a, 1, #a)
 end
 
 function mod.filter(a, func)
