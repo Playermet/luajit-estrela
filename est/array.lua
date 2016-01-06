@@ -118,4 +118,22 @@ function mod.rotate(a, step)
 	mod.reverse(a, 1, #a)
 end
 
+function mod.filter(a, func)
+  local i, j, count = 1, 1, 0
+
+  while a[i] ~= nil do
+    if func(a,i) then
+      count = count + 1
+    else
+      a[j] = a[i]
+      j = j + 1
+    end
+    i = i + 1
+  end
+
+  for i = #a, #a - count + 1, -1 do
+    a[i] = nil
+  end
+end
+
 return mod
