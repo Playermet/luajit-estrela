@@ -9,6 +9,18 @@ function mod.module(name, table)
   return mod
 end
 
+function mod.null()
+  return (0/0)
+end
+
+function mod.is_null(x)
+  return rawequal(x,x) == false
+end
+
+function mod.not_null(x)
+  return rawequal(x,x)
+end
+
 function mod.default(value, default)
   if value ~= nil then
     return value
