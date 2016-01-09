@@ -37,4 +37,9 @@ function mod.gcd(x, y)
   return y
 end
 
+-- least common multiple
+function mod.lcm(x, y)
+  return (x * y) / mod.gcd(x, y)
+end
+
 return mod
