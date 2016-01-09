@@ -10,11 +10,15 @@ function mod.clamp(value, min, max)
   return value
 end
 
-function math.round(value)
+function mod.round(value)
   if value >= 0 then
     return math.floor(value + 0.5)
   end
   return math.ceil(value - 0.5)
+end
+
+function mod.trunc(x)
+  return (math.modf(x))
 end
 
 function mod.floor_by(value, quantum)
@@ -27,6 +31,15 @@ end
 
 function mod.round_by(value, quantum)
   return mod.round(value / quantum) * quantum
+end
+
+function mod.sign(x)
+  if x > 0 then
+    return 1
+  elseif x < 0 then
+    return -1
+  end
+  return 0
 end
 
 -- greatest common divisor
