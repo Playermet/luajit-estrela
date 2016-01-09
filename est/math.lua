@@ -17,4 +17,16 @@ function math.round(value)
   return math.ceil(value - 0.5)
 end
 
+function mod.floor_by(value, quantum)
+  return math.floor(value / quantum) * quantum
+end
+
+function mod.ceil_by(value, quantum)
+  return math.ceil(value / quantum) * quantum
+end
+
+function mod.round_by(value, quantum)
+  return mod.round(value / quantum) * quantum
+end
+
 return mod
