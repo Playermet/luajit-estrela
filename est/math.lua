@@ -29,4 +29,12 @@ function mod.round_by(value, quantum)
   return mod.round(value / quantum) * quantum
 end
 
+-- greatest common divisor
+function mod.gcd(x, y)
+  while x ~= 0 do
+    x, y = y % x, x
+  end
+  return y
+end
+
 return mod
