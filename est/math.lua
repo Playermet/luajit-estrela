@@ -10,4 +10,11 @@ function mod.clamp(value, min, max)
   return value
 end
 
+function math.round(value)
+  if value >= 0 then
+    return math.floor(value + 0.5)
+  end
+  return math.ceil(value - 0.5)
+end
+
 return mod
