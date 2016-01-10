@@ -35,4 +35,27 @@ function mod.ternary(condition, if_value, else_value)
   return else_value
 end
 
+do
+  local chain_mt = {
+    __index = function (w, key)
+      local v = w[1][key]
+      if type(v) == 'function' then
+        w[2] = v
+        return w
+      end
+      return v
+    end;
+    __call = function (w, obj, ...)
+      if obj == w then
+        obj = w[1]
+      end
+      return w, w[2](obj, ...)
+    end;
+  }
+  
+  function mod.chain(obj)
+    return setmetatable({ obj }, chain_mt)
+  end
+end
+
 return mod
