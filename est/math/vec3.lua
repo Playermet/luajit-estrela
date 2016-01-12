@@ -10,4 +10,8 @@ function mod:unpack()
   return self.x, self.y, self.z
 end
 
+function mod:copy()
+  return mod:new(self.x, self.y, self.z)
+end
+
 return mod
