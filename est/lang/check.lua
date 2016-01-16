@@ -4,11 +4,11 @@ function mod.not_nil(x)
   return x ~= nil
 end
 
-function mod.same(x,y)
+function mod.same_type(x,y)
   return type(x) == type(y)
 end
 
-function mod.not_same(x,y)
+function mod.not_same_type(x,y)
   return type(x) ~= type(y)
 end
 
