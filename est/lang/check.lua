@@ -52,6 +52,10 @@ function mod.nan(x)
   return not rawequal(x,x)
 end
 
+function mod.not_nan(x)
+  return rawequal(x,x)
+end
+
 function mod.string(x)
   return type(x) == 'string'
 end
