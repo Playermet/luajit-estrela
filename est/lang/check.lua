@@ -68,7 +68,7 @@ function mod.not_empty_string(x)
   return #x > 0
 end
 
-function mod.function(x)
+function mod.func(x)
   return type(x) == 'function'
 end
 
@@ -112,8 +112,12 @@ function mod.objectof(x, y)
   return getmetatable(x) == y
 end
 
-function mod.has_field(x, field)
-  return x[field] ~= nil
+function mod.has_field(x, name)
+  return x[name] ~= nil
+end
+
+function mod.has_method(x, name)
+  return mod.func(x[name])
 end
 
 function mod.has_mt(x)
@@ -129,7 +133,7 @@ function mod.has_mt_field(x, field)
 end
 
 function mod.callable(x)
-  return mod.function(x) or mod.has_mt_field(x, '__call')
+  return mod.func(x) or mod.has_mt_field(x, '__call')
 end
 
 function mod.comparable(x)
