@@ -14,7 +14,7 @@ function mod.null()
 end
 
 function mod.is_null(x)
-  return rawequal(x,x) == false
+  return not rawequal(x,x)
 end
 
 function mod.not_null(x)
