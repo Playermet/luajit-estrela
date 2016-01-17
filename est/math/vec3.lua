@@ -14,4 +14,16 @@ function mod:copy()
   return mod:new(self.x, self.y, self.z)
 end
 
+function mod:assign(v)
+  self.x = v.x
+  self.y = v.y
+  self.z = v.z
+end
+
+function mod:setxyz(x,y,z)
+  self.x = x
+  self.y = y
+  self.z = z
+end
+
 return mod
